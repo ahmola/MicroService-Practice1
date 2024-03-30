@@ -5,7 +5,19 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      routes:
+        - id: fullstack-backend1
+          uri: lb://FULLSTACK-BACKEND1
+          predicates:
+            - Path=/**
+          filters:
+            - PrefixPath=/api/v1
+            - AddResponseHeader=X-Powered-By, DanSON Gateway Service
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
