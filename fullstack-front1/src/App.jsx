@@ -1,11 +1,22 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+import User from './User';
+import UpdateUser from './UpdateUser';
+import InfoUser from './InfoUser';
 
 const App = () => {
 
+  const [post, setPost] = useState("");
+
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<User />}></Route>
+        <Route path="/update/:id" element={<UpdateUser />}></Route>
+        <Route path='/info/:id' element={<InfoUser />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

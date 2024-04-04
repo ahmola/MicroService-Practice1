@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173",
+        methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT})
 @RequestMapping("/api/v1")
 @RestController
 public class UserController {
@@ -46,6 +48,6 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable(name = "id") Long id){
         userService.deleteById(id);
-        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 }
