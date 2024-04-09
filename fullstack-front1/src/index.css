@@ -25,9 +25,14 @@ h1{
     background-color: aliceblue;
     border: none;
     border-radius: 10px;
-    width: 800px;
-    height: 500px;
     padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.user .username{
+    text-transform: uppercase;
 }
 
 .add-user{

@@ -18,7 +18,7 @@ export default function InfoUser() {
 
     const fetchData = async () => {
         try{
-          const response = await axios.get(`http://localhost:8765/user/${id}`);
+          const response = await axios.get(`http://localhost:8080/api/v1/user/${id}`);
           setUser(response.data);
         }catch(error){
           console.error("Error Fetching : " + error);
