@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, {useState, useEffect}from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Header from './Header';
 
 export default function InfoUser() {
 
@@ -26,8 +27,13 @@ export default function InfoUser() {
     };
 
   return (
-    <div>
-        User: {user.username}, {user.email}, {user.password}
-    </div>
+    <>
+      <Header />
+      <div className='user'>
+          <p className='username'>username : {user.username} </p>
+          <p>Email: {user.email}</p>
+          <p>Password: {user.password}</p>
+      </div>
+    </>
   )
 }

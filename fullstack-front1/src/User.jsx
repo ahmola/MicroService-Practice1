@@ -1,22 +1,57 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button'
+import Header from './Header';
+import { ButtonGroup, Card, CardGroup } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-export default function User({ users }) {
+export default function User() {
+
+  const [users, setUsers] = useState([]);
+
+    const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:8080/api/v1/user/${id}`)
+    fetchData();
+  }
+  const fetchData = async () => {
+    try{
+      const response = await axios.get("http://localhost:8080/api/v1/users");
+      setUsers(response.data);
+    }catch(error){ 
+      console.error("Error Fetching : " + error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
       
   return (
-    <div>
-        {users.map((user) => (
-            <div className='user'>
-                <h2 className='username'>{user.username}</h2>
-                <p>Email : {user.email}</p>
-                <div>
-                    <Link className='user-info' to={`/info/${user.id}`}>Info</Link>
-                    <Link className='user-update' to={`/update/${user.id}`}>Update</Link>
-                    <button className='user-delete'>Delete</button>
-                </div>
-            </div>
-        ))}
-    </div>
+    <>
+      <Header />
+      <div>
+        <Row xs={3} md={3} className="g-4">
+          {users.map((user) => (
+            <Col key={user.id}>
+              <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                  <Card.Title>{user.username}</Card.Title>
+                  <Card.Text>
+                    Email : {user.email}
+                    <ButtonGroup>
+                      <Button variant='primary' href={`/info/${user.id}`}>Info</Button>
+                      <Button variant='success' href={`/update/${user.id}`}>Update</Button>
+                      <Button variant='danger' onClick={() => deleteUser(user.id)}>Delete</Button>
+                    </ButtonGroup>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+          </Row>
+        </div>
+    </>
   )
 }

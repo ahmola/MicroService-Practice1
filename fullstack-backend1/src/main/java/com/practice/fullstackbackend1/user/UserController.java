@@ -1,5 +1,6 @@
 package com.practice.fullstackbackend1.user;
 
+import jakarta.ws.rs.Path;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +38,9 @@ public class UserController {
         return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("/user")
-    public ResponseEntity<Boolean> updateUser(@RequestBody UserDTO userDTO){
+    @PutMapping("/user/{id}")
+    public ResponseEntity<Boolean> updateUser(@PathVariable(name = id) Long id,
+                                              @RequestBody UserDTO userDTO){
         Boolean isCreated = userService.save(userDTO);
         if(isCreated)
             return new ResponseEntity<>(isCreated, HttpStatus.CREATED);
