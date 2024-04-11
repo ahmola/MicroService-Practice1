@@ -30,12 +30,15 @@ public class UserService {
         Boolean isCreated = false;
         User user = new User();
 
-        if(!userRepository.existsByUsername(userDTO.getUsername())){
+        if(!userRepository.existsById(userDTO.getId())){
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             user = new User(userDTO);
             isCreated = true;
         }else {
-            user = userRepository.findByUsername(user.getUsername()).get();
+            user = userRepository.findById(userDTO.getId()).get();
+            user.setUsername(userDTO.getUsername());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            user.setEmail(userDTO.getEmail());
         }
 
         userRepository.save(user);
@@ -51,6 +54,9 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
 
+    public boolean existsById(Long id){
+        return userRepository.existsById(id);
+    }
     public void deleteById(Long id){
         userRepository.deleteById(id);
     }

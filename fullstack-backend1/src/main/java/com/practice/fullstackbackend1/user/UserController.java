@@ -39,9 +39,10 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<Boolean> updateUser(@PathVariable(name = id) Long id,
+    public ResponseEntity<Boolean> updateUser(@PathVariable(name = "id") Long id,
                                               @RequestBody UserDTO userDTO){
         Boolean isCreated = userService.save(userDTO);
+
         if(isCreated)
             return new ResponseEntity<>(isCreated, HttpStatus.CREATED);
         return new ResponseEntity<>(isCreated, HttpStatus.OK);

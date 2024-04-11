@@ -31,11 +31,11 @@ export default function User() {
   return (
     <>
       <Header />
-      <div>
-        <Row xs={3} md={3} className="g-4">
+      <div className='container'>
+        <Row>
           {users.map((user) => (
-            <Col key={user.id}>
-              <Card style={{ width: '18rem' }}>
+            <div className='col-md-3'>
+              <Card style={{ width: '16rem', margin: '15px', marginTop: '30px'}}>
                 <Card.Body>
                   <Card.Title>{user.username}</Card.Title>
                   <Card.Text>
@@ -48,10 +48,10 @@ export default function User() {
                   </Card.Text>
                 </Card.Body>
               </Card>
-            </Col>
+            </div>
           ))}
-          </Row>
-        </div>
+        </Row>
+      </div>
     </>
   )
 }
