@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: fullstack-backend-login
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/practice?useSSL=false
+    username: "park"
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

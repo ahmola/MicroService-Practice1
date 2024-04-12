@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:5173",
         methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT})
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/home")
 @RestController
 public class UserController {
 

@@ -9,9 +9,15 @@ spring:
         - id: fullstack-backend1
           uri: lb://FULLSTACK-BACKEND1
           predicates:
-            - Path=/**
+            - Path=/home/**
           filters:
             - PrefixPath=/api/v1
+            - AddResponseHeader=X-Powered-By, DanSON Gateway Service
+        - id: fullstack-backend-login
+          uri: lb://FULLSTACK-BACKEND-LOGIN
+          predicates:
+            - Path=/login/**
+          filters:
             - AddResponseHeader=X-Powered-By, DanSON Gateway Service
       discovery:
         locator:
